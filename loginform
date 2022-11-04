@@ -1,0 +1,74 @@
+<?php
+//基本信息
+$host="localhost";
+$user="root";
+$password="";
+$db="login";
+
+
+//数据库链接
+mysql_connect($host,$user,$password);
+mysql_select_db($db);
+//定义变量
+if(isset($_POST["username"])){
+   $username=$_POST['username'];
+   $password=$_POST['password'];
+   //sql数据库查询
+    $sql = " SELECT id FROM login WHERE user = '$username' and password= '$password'  ";
+    //数据返回
+   $result=mysql_query($sql);
+
+   //操作逻辑
+   if(mysql_num_rows($result)){
+      echo"登录成功";
+	  exit();
+   
+   }
+   else{
+      echo" 账号或密码错误，登录不成功";
+	  exit();
+   
+   
+   }
+
+ 
+}
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="UncleYee">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>登录框+数据库</title>
+  <style type="text/css">
+	.loginbtn{
+	   width:173px;
+	}
+
+	.loginform{
+	   margin:130px 0 0 250px ;
+	
+	}
+  </style>
+ </head>
+ <body>
+    <div class="loginform">
+		<form method="POST" action="#">
+			<input type="text" name="username" placeholder="请输入账号"  class=" username"/>
+			<br/>
+			<input type="password" name="password" placeholder="请输入密码"  class=" password "/>
+			<br/>
+			<br/>
+			<!---------登录按钮------>
+			<input type="submit" name="submit" value="登录" class="loginbtn"/>
+		</form>
+    </div>
+  
+ </body>
+</html>
